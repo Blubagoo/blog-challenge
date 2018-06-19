@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('bodyParser');
-const jsonParser = bodyParser.json();
 
 const {BlogPost} = require('./models');
 
@@ -13,7 +11,7 @@ BlogPost.create({title:"Days Go By",
 router.get('/', (req,res) => {
 	res.json(BlogPost.get());
 });
-router.post('/', jsonParser, (req, res) => {
+router.post('/', (req, res) => {
 	const requiredFields =  ["title", "content", "author", "publishDate"];
 	for(let i=0; i<requiredFields.length; i++){
 		const field = requiredFields[i];
@@ -27,7 +25,7 @@ router.post('/', jsonParser, (req, res) => {
 	};
 });
 
-router.put('/:id', jsonParser, (req, res) => {
+router.put('/:id', (req, res) => {
 	const requiredFields = ["title", "content", "author", "publishDate"];
 	for(let i=0; i<requiredFields.length; i++){
 		const field = requiredFields[i];
