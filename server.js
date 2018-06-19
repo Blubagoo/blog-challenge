@@ -10,7 +10,7 @@ const app = express();
 
 const blogPostRouter = require('./blogrouter');
 
-app.use(express.static('public');
+app.use(express.static('public'));
 app.use(morgan('common'));
 app.use('/blog-posts', blogPostRouter);
 
