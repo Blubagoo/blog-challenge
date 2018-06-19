@@ -1,0 +1,27 @@
+{
+  "name": "blog-project",
+  "version": "1.0.0",
+  "description": "api endpoint for a blog",
+  "main": "\u001b[B()\u001b[Dserver.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blubagoo/blog-challenge.git"
+  },
+  "keywords": [
+    "blog",
+    "challenge"
+  ],
+  "author": "Jim Tisdale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blubagoo/blog-challenge/issues"
+  },
+  "homepage": "https://github.com/Blubagoo/blog-challenge#readme",
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
+}
