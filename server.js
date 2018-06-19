@@ -3,10 +3,8 @@ const morgan = require('morgan');
 
 const router = express.Router();
 
-
 const {BlogPosts} = require('./models');
 
-const jsonParser = bodyParser.json();
 const app = express();
 
 const blogPostRouter = require('./blogrouter');
