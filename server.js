@@ -1,6 +1,8 @@
 const express = require('express');
-const router = express.Router();
 const morgan = require('morgan');
+
+const router = express.Router();
+
 const bodyParser = require('bodyParser');
 
 const {BlogPosts} = require('./models');
