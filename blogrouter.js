@@ -5,31 +5,31 @@ const jsonParser = bodyParser.json();
 
 const {BlogPost} = require('./models');
 
-BlogPost.create("title":"Days Go By",
-				"content": "things",
-				"author": "Joe Schmo",
-				"publishDate": "11/12/13");
+BlogPost.create({title:"Days Go By",
+				content: "things",
+				author: "Joe Schmo",
+				publishDate: "11/12/13"});
 
 router.get('/', (req,res) => {
 	res.json(BlogPost.get());
 });
 router.post('/', jsonParser, (req, res) => {
 	const requiredFields =  ["title", "content", "author", "publishDate"];
-	for(i=0; i<requiredFields.length; i++){
+	for(let i=0; i<requiredFields.length; i++){
 		const field = requiredFields[i];
 		if(!(field in req.body)){
 			const message = `Missing \`${field}\` in request body`;
 			console.error(message);
 			return res.status(400).send(message);
 		}
-		const item = BlobPost.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
+		const item = BlogPost.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
 		return res.status(201).json(item);
 	};
 });
 
 router.put('/:id', jsonParser, (req, res) => {
 	const requiredFields = ["title", "content", "author", "publishDate"];
-	for(i=0; i<requiredFields.length; i++){
+	for(let i=0; i<requiredFields.length; i++){
 		const field = requiredFields[i];
 		if(!(field in req.body)){
 			const message = `Missing \`${field}\` in request body`;
@@ -38,7 +38,7 @@ router.put('/:id', jsonParser, (req, res) => {
 	}
 	if(req.params.id !== req.body.id){
 		const message = `Request path id (${req.params.id}) must match request body id(${req.body.id})`;
-		res.status(400).send(messsage);
+		res.status(400).send(message);
 	}
 	console.log(`updating blog with id ${req.body.id}`);
 	BlogPost.update({
