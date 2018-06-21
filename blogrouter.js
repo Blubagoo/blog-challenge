@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const {BlogPost} = require('./models');
+const {BlogPosts} = require('./models');
+console.log('we are importing ', BlogPosts);
 
-BlogPost.create({title:"Days Go By",
+BlogPosts.create({title:"Days Go By",
 				content: "things",
 				author: "Joe Schmo",
 				publishDate: "11/12/13"});
 
 router.get('/', (req,res) => {
-	res.json(BlogPost.get());
+	res.json(BlogPosts.get());
 });
 router.post('/', (req, res) => {
 	const requiredFields =  ["title", "content", "author", "publishDate"];
+	console.log('req.body', req);
 	for(let i=0; i<requiredFields.length; i++){
 		const field = requiredFields[i];
 		if(!(field in req.body)){
@@ -20,7 +22,7 @@ router.post('/', (req, res) => {
 			console.error(message);
 			return res.status(400).send(message);
 		}
-		const item = BlogPost.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
+		const item = BlogPosts.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
 		return res.status(201).json(item);
 	};
 });
@@ -39,7 +41,7 @@ router.put('/:id', (req, res) => {
 		res.status(400).send(message);
 	}
 	console.log(`updating blog with id ${req.body.id}`);
-	BlogPost.update({
+	BlogPosts.update({
 		"title": req.body.title,
 		"content": req.body.content,
 		"author": req.body.author,
@@ -49,7 +51,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-	BlogPost.delete(require.params.id);
+	BlogPosts.delete(require.params.id);
 	console.log(`Deleted blog with id ${req.params.id}`);
 	res.status(204).end();
 });
