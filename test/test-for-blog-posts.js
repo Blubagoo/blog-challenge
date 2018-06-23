@@ -1,12 +1,12 @@
 const chai = require('chai');
-const chaiHTTP = require('chai-http');
-const expect = chai.expect;
+const chaiHttp = require('chai-http');
+const expect = require('chai').expect;
 
 const {app, runServer, closeServer} = require('../server');
 
-chai.use(chaiHTTP);
+chai.use(chaiHttp);
 
-describe('Blog-Posts', function() {
+describe('Blog Posts', function() {
 
 	before(function() {
 		return runServer();
@@ -22,16 +22,14 @@ describe('Blog-Posts', function() {
 	
 		return chai.request(app)
 			.get('/blog-posts')
-			.send(newPost)
 			.then(function(res) {
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				expect(res.body.length).to.be.at.least(1);
 				expect(res.body).to.be.a('array');
-				const expectedKeys = ['title', 'content', 'author', 'publishDate'];
-				res.body.for.Each(function(item) {
+				res.body.forEach(function(item) {
 					expect(item).to.be.a('object');
-					expect(item).to.include.keys(expectedKeys);
+					expect(item).to.have.all.keys('id','title', 'content', 'author', 'publishDate');
 				});
 			});
 	});
@@ -44,6 +42,7 @@ describe('Blog-Posts', function() {
 	
 		return chai.request(app)
 			.post('/blog-posts')
+			.send(newPost)
 			.then(function(res) {
 				expect(res).to.have.status(201);
 				expect(res).to.be.json;
@@ -93,7 +92,7 @@ describe('Blog-Posts', function() {
 
 
 
-};
+});
 
 
 

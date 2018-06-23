@@ -9,10 +9,12 @@ const blogPostRouter = require('./blogrouter');
 
 
 
-
+app.use(express.static('public'))
 
 app.use(morgan('common'));
+
 app.use(express.json());
+
 app.use('/blog-posts', blogPostRouter);
 
 app.get("/", (req, res) => {
